@@ -1,20 +1,39 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Agro-sense 🌾
 
-# Run and deploy your AI Studio app
+**Agro-sense** is an AI-powered digital advisor designed specifically for farmers in Maharashtra, India. It provides localized, intelligent insights to improve crop yield, manage pests, and optimize resource usage.
 
-This contains everything you need to run your app locally.
+## 🚀 Features
 
-View your app in AI Studio: https://ai.studio/apps/889626c3-b490-4f92-8e8e-182832769f81
+- **Crop Advisor**: Get intelligent crop recommendations based on your district, soil type, and the current season.
+- **Pest Detector**: Identify common pests and diseases with detailed diagnosis and both organic and chemical solutions.
+- **Irrigation Planner**: Calculate estimated water needs for your farm based on area, crop type, and irrigation method.
+- **Market Prices**: Stay updated with real-time mandi rates for major commodities across Maharashtra districts.
+- **Agro Schemes**: Explore latest government subsidies, insurance, and income support schemes (PM-Kisan, Namo Shetkari, etc.).
+- **Soil Health**: Practical tips to maintain and improve soil fertility and texture.
 
-## Run Locally
+## 🌐 Multi-lingual Support
 
-**Prerequisites:**  Node.js
+To ensure accessibility for all farmers, the entire application is available in:
+- **English**
+- **Marathi (मराठी)**
+- **Hindi (हिंदी)**
 
+## 🛠️ Tech Stack
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+- **Frontend**: React 18 with TypeScript
+- **Styling**: Tailwind CSS 4.0
+- **Animations**: Motion (formerly Framer Motion)
+- **Icons**: Lucide React
+- **Build Tool**: Vite
+
+## 📱 Mobile Optimized
+
+The application is designed with a mobile-first approach, ensuring fast performance and a smooth user interface on smartphones, which are the primary devices used by farmers.
+
+## 🔒 Privacy & Performance
+
+- **No API Keys Required**: The application uses robust local logic for recommendations, ensuring it works instantly without external API dependencies or latency.
+- **Fast & Reliable**: Optimized for low-bandwidth conditions common in rural areas.
+
+---
+© 2026 Smart Farming Maharashtra
