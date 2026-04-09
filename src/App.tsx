@@ -107,7 +107,7 @@ const translations: Record<Language, Translation> = {
     viewMore: "View More",
     organic: "Organic Solution",
     clear: "Clear",
-    selectCrop: "Select Crop",
+    selectCrop: "Select Soil",
     selectSymptom: "Select Symptoms",
     chemicalSolution: "Chemical Solution",
     active: "Active",
