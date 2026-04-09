@@ -1,0 +1,5 @@
+{
+  "name": "Agro-sense",
+  "description": "An AI-powered digital advisor for farmers in Maharashtra, providing intelligent crop recommendations, pest detection, weather-based irrigation planning, and real-time market insights.",
+  "requestFramePermissions": []
+}
