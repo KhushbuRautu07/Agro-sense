@@ -35,6 +35,7 @@ interface Translation {
   organic: string;
   clear: string;
   selectCrop: string;
+  selectSoil: string;
   selectSymptom: string;
   chemicalSolution: string;
   active: string;
@@ -107,7 +108,8 @@ const translations: Record<Language, Translation> = {
     viewMore: "View More",
     organic: "Organic Solution",
     clear: "Clear",
-    selectCrop: "Select Soil",
+    selectCrop: "Select Crop",
+    selectSoil: "Select Soil Type",
     selectSymptom: "Select Symptoms",
     chemicalSolution: "Chemical Solution",
     active: "Active",
@@ -186,6 +188,7 @@ const translations: Record<Language, Translation> = {
     organic: "सेंद्रिय उपाय",
     clear: "पुसा",
     selectCrop: "पीक निवडा",
+    selectSoil: "मातीचा प्रकार निवडा",
     selectSymptom: "लक्षणे निवडा",
     chemicalSolution: "रासायनिक उपाय",
     active: "सक्रिय",
@@ -264,6 +267,7 @@ const translations: Record<Language, Translation> = {
     organic: "जैविक उपाय",
     clear: "साफ करें",
     selectCrop: "फसल चुनें",
+    selectSoil: "मिट्टी का प्रकार चुनें",
     selectSymptom: "लक्षण चुनें",
     chemicalSolution: "रासायनिक समाधान",
     active: "सक्रिय",
@@ -754,7 +758,7 @@ const CropAdvisorCard = () => {
               onChange={(e) => setSoil(e.target.value)}
               className="w-full p-4 bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-2xl text-slate-900 dark:text-slate-100 font-bold outline-none focus:ring-2 focus:ring-emerald-500 transition-all shadow-sm"
             >
-              <option value="">{t('selectCrop')}</option>
+              <option value="">{t('selectSoil')}</option>
               {SOIL_TYPES.map((s) => (
                 <option key={s.id} value={s.id}>
                   {s.icon} {s.label[language]}
