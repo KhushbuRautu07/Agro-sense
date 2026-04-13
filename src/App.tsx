@@ -75,6 +75,7 @@ interface Translation {
   openTool: string;
   backToDashboard: string;
   viewAllSchemes: string;
+  recommendations: string;
   per: string;
   marketDisclaimer: string;
   quintal: string;
@@ -157,6 +158,7 @@ const translations: Record<Language, Translation> = {
     openTool: "Open Tool",
     backToDashboard: "Back to Dashboard",
     viewAllSchemes: "View All Government Schemes",
+    recommendations: "Recommended Crops",
     per: "per",
     marketDisclaimer: "* Prices are indicative and updated daily from APMC sources.",
     quintal: "Quintal",
@@ -236,6 +238,7 @@ const translations: Record<Language, Translation> = {
     openTool: "साधन उघडा",
     backToDashboard: "डॅशबोर्डवर परत जा",
     viewAllSchemes: "सर्व शासकीय योजना पहा",
+    recommendations: "शिफारस केलेली पिके",
     per: "प्रति",
     marketDisclaimer: "* किमती सूचक आहेत आणि APMC स्रोतांकडून दररोज अपडेट केल्या जातात.",
     quintal: "क्विंटल",
@@ -315,6 +318,7 @@ const translations: Record<Language, Translation> = {
     openTool: "उपकरण खोलें",
     backToDashboard: "डैशबोर्ड पर वापस जाएं",
     viewAllSchemes: "सभी सरकारी योजनाएं देखें",
+    recommendations: "अनुशंसित फसलें",
     per: "प्रति",
     marketDisclaimer: "* कीमतें सांकेतिक हैं और APMC स्रोतों से दैनिक रूप से अपडेट की जाती हैं।",
     quintal: "क्विंटल",
@@ -412,50 +416,140 @@ const MOCK_MARKET_PRICES = [
 const CROP_RECOMMENDATIONS: Record<string, Record<string, any>> = {
   black: {
     kharif: {
-      English: { crop: "Cotton", suitability: 95, reason: "Black soil (Regur) is ideal for cotton due to its high moisture retention.", tips: ["Ensure proper drainage", "Use high-quality Bt seeds", "Monitor for pink bollworm"] },
-      Marathi: { crop: "कापूस", suitability: 95, reason: "काळी माती (रेगूर) कापसासाठी उत्तम आहे कारण ती ओलावा टिकवून ठेवते.", tips: ["योग्य निचरा सुनिश्चित करा", "उच्च दर्जाचे बीटी बियाणे वापरा", "गुलाबी बोंडअळीवर लक्ष ठेवा"] },
-      Hindi: { crop: "कपास", suitability: 95, reason: "काली मिट्टी कपास के लिए आदर्श है क्योंकि यह नमी को अच्छी तरह सोखती है।", tips: ["उचित जल निकासी सुनिश्चित करें", "उच्च गुणवत्ता वाले बीटी बीजों का उपयोग करें", "गुलाबी बोलवर्म की निगरानी करें"] }
+      English: [
+        { crop: "Cotton", suitability: 95, reason: "Black soil (Regur) is ideal for cotton due to its high moisture retention.", tips: ["Ensure proper drainage", "Use high-quality Bt seeds", "Monitor for pink bollworm"] },
+        { crop: "Soybean", suitability: 88, reason: "Excellent for soybean as it provides good support and nutrients.", tips: ["Seed treatment is essential", "Maintain optimum plant population", "Control girdle beetle"] },
+        { crop: "Tur/Pigeon Pea", suitability: 82, reason: "Grows well as an intercrop or sole crop in black soil.", tips: ["Avoid waterlogging", "Control pod borer", "Timely harvesting"] }
+      ],
+      Marathi: [
+        { crop: "कापूस", suitability: 95, reason: "काळी माती (रेगूर) कापसासाठी उत्तम आहे कारण ती ओलावा टिकवून ठेवते.", tips: ["योग्य निचरा सुनिश्चित करा", "उच्च दर्जाचे बीटी बियाणे वापरा", "गुलाबी बोंडअळीवर लक्ष ठेवा"] },
+        { crop: "सोयाबीन", suitability: 88, reason: "सोयाबीनसाठी उत्कृष्ट कारण ती चांगले समर्थन आणि पोषक तत्वे प्रदान करते.", tips: ["बीजप्रक्रिया आवश्यक आहे", "रोपांची संख्या योग्य ठेवा", "चक्री भुंग्यावर नियंत्रण ठेवा"] },
+        { crop: "तूर", suitability: 82, reason: "काळ्या मातीत आंतरपीक किंवा स्वतंत्र पीक म्हणून चांगले येते.", tips: ["पाणी साचणे टाळा", "शेंग पोखरणाऱ्या अळीवर नियंत्रण ठेवा", "वेळेवर काढणी करा"] }
+      ],
+      Hindi: [
+        { crop: "कपास", suitability: 95, reason: "काली मिट्टी कपास के लिए आदर्श है क्योंकि यह नमी को अच्छी तरह सोखती है।", tips: ["उचित जल निकासी सुनिश्चित करें", "उच्च गुणवत्ता वाले बीटी बीजों का उपयोग करें", "गुलाबी बोलवर्म की निगरानी करें"] },
+        { crop: "सोयाबीन", suitability: 88, reason: "सोयाबीन के लिए उत्कृष्ट क्योंकि यह अच्छा समर्थन और पोषक तत्व प्रदान करती है।", tips: ["बीज उपचार आवश्यक है", "पौधों की इष्टतम संख्या बनाए रखें", "गर्डल बीटल को नियंत्रित करें"] },
+        { crop: "अरहर", suitability: 82, reason: "काली मिट्टी में अंतरफसल या एकल फसल के रूप में अच्छी तरह बढ़ती है।", tips: ["जलभराव से बचें", "फली छेदक को नियंत्रित करें", "समय पर कटाई"] }
+      ]
     },
     rabi: {
-      English: { crop: "Wheat", suitability: 90, reason: "Black soil provides the necessary nutrients for a healthy wheat crop in winter.", tips: ["Timely irrigation is key", "Apply balanced fertilizers", "Watch for rust disease"] },
-      Marathi: { crop: "गहू", suitability: 90, reason: "हिवाळ्यात गव्हाच्या पिकासाठी काळी माती आवश्यक पोषक तत्वे पुरवते.", tips: ["वेळेवर सिंचन महत्त्वाचे आहे", "संतुलित खतांचा वापर करा", "तांबेरा रोगावर लक्ष ठेवा"] },
-      Hindi: { crop: "गेहूं", suitability: 90, reason: "सर्दियों में गेहूं की फसल के लिए काली मिट्टी आवश्यक पोषक तत्व प्रदान करती है।", tips: ["समय पर सिंचाई महत्वपूर्ण है", "संतुलित उर्वरकों का प्रयोग करें", "रस्ट रोग की निगरानी करें"] }
+      English: [
+        { crop: "Wheat", suitability: 92, reason: "Black soil provides the necessary nutrients for a healthy wheat crop in winter.", tips: ["Timely irrigation is key", "Apply balanced fertilizers", "Watch for rust disease"] },
+        { crop: "Gram (Harbhara)", suitability: 90, reason: "Thrives in residual moisture of black soil during rabi.", tips: ["Control wilt disease", "Avoid excessive irrigation", "Nipping at early stage"] },
+        { crop: "Jowar", suitability: 85, reason: "Drought resistant and grows well in black soil.", tips: ["Control shoot fly", "Maintain spacing", "Timely weeding"] }
+      ],
+      Marathi: [
+        { crop: "गहू", suitability: 92, reason: "हिवाळ्यात गव्हाच्या पिकासाठी काळी माती आवश्यक पोषक तत्वे पुरवते.", tips: ["वेळेवर सिंचन महत्त्वाचे आहे", "संतुलित खतांचा वापर करा", "तांबेरा रोगावर लक्ष ठेवा"] },
+        { crop: "हरभरा", suitability: 90, reason: "रब्बी हंगामात काळ्या मातीतील ओलाव्यावर चांगले येते.", tips: ["मर रोगावर नियंत्रण ठेवा", "जास्त सिंचन टाळा", "सुरुवातीच्या काळात शेंडे खुडा"] },
+        { crop: "ज्वारी", suitability: 85, reason: "दुष्काळ प्रतिरोधक आणि काळ्या मातीत चांगली वाढते.", tips: ["खोडमाशी नियंत्रित करा", "योग्य अंतर ठेवा", "वेळेवर तण काढणे"] }
+      ],
+      Hindi: [
+        { crop: "गेहूं", suitability: 92, reason: "सर्दियों में गेहूं की फसल के लिए काली मिट्टी आवश्यक पोषक तत्व प्रदान करती है।", tips: ["समय पर सिंचाई महत्वपूर्ण है", "संतुलित उर्वरकों का प्रयोग करें", "रस्ट रोग की निगरानी करें"] },
+        { crop: "चना", suitability: 90, reason: "रबी के दौरान काली मिट्टी की अवशिष्ट नमी में पनपता है।", tips: ["उकठा रोग को नियंत्रित करें", "अत्यधिक सिंचाई से बचें", "शुरुआती अवस्था में निपिंग"] },
+        { crop: "ज्वार", suitability: 85, reason: "सूखा प्रतिरोधी और काली मिट्टी में अच्छी तरह बढ़ता है।", tips: ["शूट फ्लाई को नियंत्रित करें", "दूरी बनाए रखें", "समय पर निराई"] }
+      ]
     },
     summer: {
-      English: { crop: "Groundnut", suitability: 80, reason: "With irrigation, black soil can support summer groundnut.", tips: ["Frequent light irrigation", "Control leaf miners", "Harvest at right maturity"] },
-      Marathi: { crop: "भुईमूग", suitability: 80, reason: "सिंचनासह, काळी माती उन्हाळी भुईमुगाला आधार देऊ शकते.", tips: ["वारंवार हलके सिंचन", "लीफ मायनर्स नियंत्रित करा", "योग्य पक्वतेवर काढणी करा"] },
-      Hindi: { crop: "मूंगफली", suitability: 80, reason: "सिंचाई के साथ, काली मिट्टी गर्मियों की मूंगफली का समर्थन कर सकती है।", tips: ["बार-बार हल्की सिंचाई", "लीफ माइनर्स को नियंत्रित करें", "सही परिपक्वता पर कटाई करें"] }
+      English: [
+        { crop: "Groundnut", suitability: 85, reason: "With irrigation, black soil can support summer groundnut.", tips: ["Frequent light irrigation", "Control leaf miners", "Harvest at right maturity"] },
+        { crop: "Moong", suitability: 80, reason: "Short duration crop suitable for summer.", tips: ["Control yellow mosaic", "Timely irrigation", "Harvest pods as they ripen"] }
+      ],
+      Marathi: [
+        { crop: "भुईमूग", suitability: 85, reason: "सिंचनासह, काळी माती उन्हाळी भुईमुगाला आधार देऊ शकते.", tips: ["वारंवार हलके सिंचन", "लीफ मायनर्स नियंत्रित करा", "योग्य पक्वतेवर काढणी करा"] },
+        { crop: "मूग", suitability: 80, reason: "उन्हाळ्यासाठी योग्य अल्प कालावधीचे पीक.", tips: ["पिवळा मोझॅक नियंत्रित करा", "वेळेवर सिंचन", "शेंगा पिकल्यावर काढणी करा"] }
+      ],
+      Hindi: [
+        { crop: "मूंगफली", suitability: 85, reason: "सिंचाई के साथ, काली मिट्टी गर्मियों की मूंगफली का समर्थन कर सकती है।", tips: ["बार-बार हल्की सिंचाई", "लीफ माइनर्स को नियंत्रित करें", "सही परिपक्वता पर कटाई करें"] },
+        { crop: "मूंग", suitability: 80, reason: "गर्मियों के लिए उपयुक्त कम अवधि की फसल।", tips: ["पीला मोज़ेक नियंत्रित करें", "समय पर सिंचाई", "फलियां पकने पर कटाई करें"] }
+      ]
     }
   },
   red: {
     kharif: {
-      English: { crop: "Soybean", suitability: 88, reason: "Red soil is well-drained and suitable for soybean during monsoon.", tips: ["Seed treatment is essential", "Maintain optimum plant population", "Control girdle beetle"] },
-      Marathi: { crop: "सोयाबीन", suitability: 88, reason: "लाल माती पाण्याचा निचरा होणारी असून पावसाळ्यात सोयाबीनसाठी योग्य आहे.", tips: ["बीजप्रक्रिया आवश्यक आहे", "रोपांची संख्या योग्य ठेवा", "चक्री भुंग्यावर नियंत्रण ठेवा"] },
-      Hindi: { crop: "सोयाबीन", suitability: 88, reason: "लाल मिट्टी अच्छी जल निकासी वाली होती है और मानसून के दौरान सोयाबीन के लिए उपयुक्त है।", tips: ["बीज उपचार आवश्यक है", "पौधों की इष्टतम संख्या बनाए रखें", "गर्डल बीटल को नियंत्रित करें"] }
+      English: [
+        { crop: "Soybean", suitability: 88, reason: "Red soil is well-drained and suitable for soybean during monsoon.", tips: ["Seed treatment is essential", "Maintain optimum plant population", "Control girdle beetle"] },
+        { crop: "Bajra", suitability: 85, reason: "Red soil with low water requirement is good for Bajra.", tips: ["Use hybrid seeds", "Control downy mildew", "Timely weeding"] },
+        { crop: "Groundnut", suitability: 82, reason: "Red soil provides good aeration for groundnut pods.", tips: ["Apply gypsum", "Control tikka disease", "Avoid water stress at pegging"] }
+      ],
+      Marathi: [
+        { crop: "सोयाबीन", suitability: 88, reason: "लाल माती पाण्याचा निचरा होणारी असून पावसाळ्यात सोयाबीनसाठी योग्य आहे.", tips: ["बीजप्रक्रिया आवश्यक आहे", "रोपांची संख्या योग्य ठेवा", "चक्री भुंग्यावर नियंत्रण ठेवा"] },
+        { crop: "बाजरी", suitability: 85, reason: "कमी पाण्याची गरज असलेल्या लाल मातीत बाजरी चांगली येते.", tips: ["हायब्रीड बियाणे वापरा", "केवडा रोग नियंत्रित करा", "वेळेवर तण काढणे"] },
+        { crop: "भुईमूग", suitability: 82, reason: "लाल माती भुईमुगाच्या शेंगांच्या वाढीसाठी चांगली हवा खेळती ठेवते.", tips: ["जिप्समचा वापर करा", "टिक्का रोगावर नियंत्रण ठेवा", "आऱ्या सुटताना पाण्याचा ताण टाळा"] }
+      ],
+      Hindi: [
+        { crop: "सोयाबीन", suitability: 88, reason: "लाल मिट्टी अच्छी जल निकासी वाली होती है और मानसून के दौरान सोयाबीन के लिए उपयुक्त है।", tips: ["बीज उपचार आवश्यक है", "पौधों की इष्टतम संख्या बनाए रखें", "गर्डल बीटल को नियंत्रित करें"] },
+        { crop: "बाजरा", suitability: 85, reason: "कम पानी की आवश्यकता वाली लाल मिट्टी बाजरा के लिए अच्छी है।", tips: ["हाइब्रिड बीजों का उपयोग करें", "डाउनी मिल्ड्यू को नियंत्रित करें", "समय पर निराई"] },
+        { crop: "मूंगफली", suitability: 82, reason: "लाल मिट्टी मूंगफली की फलियों के लिए अच्छा वातन प्रदान करती है।", tips: ["जिप्सम डालें", "टिक्का रोग को नियंत्रित करें", "पेगिंग के समय पानी के तनाव से बचें"] }
+      ]
     },
     rabi: {
-      English: { crop: "Jowar", suitability: 82, reason: "Red soil can support Jowar in rabi with supplementary irrigation.", tips: ["Control shoot fly", "Apply organic mulch", "Timely weeding"] },
-      Marathi: { crop: "ज्वारी", suitability: 82, reason: "लाल माती पूरक सिंचनासह रब्बीमध्ये ज्वारीला आधार देऊ शकते.", tips: ["खोडमाशी नियंत्रित करा", "सेंद्रिय आच्छादन वापरा", "वेळेवर तण काढणे"] },
-      Hindi: { crop: "ज्वार", suitability: 82, reason: "लाल मिट्टी पूरक सिंचाई के साथ रबी में ज्वार का समर्थन कर सकती है।", tips: ["शूट फ्लाई को नियंत्रित करें", "जैविक मल्च का प्रयोग करें", "समय पर निराई"] }
+      English: [
+        { crop: "Jowar", suitability: 82, reason: "Red soil can support Jowar in rabi with supplementary irrigation.", tips: ["Control shoot fly", "Apply organic mulch", "Timely weeding"] },
+        { crop: "Wheat", suitability: 78, reason: "Can be grown in red soil with proper fertilization and irrigation.", tips: ["Balanced NPK application", "Irrigate at critical stages", "Control weeds"] }
+      ],
+      Marathi: [
+        { crop: "ज्वारी", suitability: 82, reason: "लाल माती पूरक सिंचनासह रब्बीमध्ये ज्वारीला आधार देऊ शकते.", tips: ["खोडमाशी नियंत्रित करा", "सेंद्रिय आच्छादन वापरा", "वेळेवर तण काढणे"] },
+        { crop: "गहू", suitability: 78, reason: "योग्य खत आणि सिंचन व्यवस्थापनासह लाल मातीत घेता येतो.", tips: ["संतुलित खत वापर", "महत्त्वाच्या टप्प्यावर सिंचन", "तण नियंत्रण"] }
+      ],
+      Hindi: [
+        { crop: "ज्वार", suitability: 82, reason: "लाल मिट्टी पूरक सिंचाई के साथ रबी में ज्वार का समर्थन कर सकती है।", tips: ["शूट फ्लाई को नियंत्रित करें", "जैविक मल्च का प्रयोग करें", "समय पर निराई"] },
+        { crop: "गेहूं", suitability: 78, reason: "उचित उर्वरक और सिंचाई के साथ लाल मिट्टी में उगाया जा सकता है।", tips: ["संतुलित एनपीके अनुप्रयोग", "महत्वपूर्ण चरणों में सिंचाई करें", "खरपतवार नियंत्रण"] }
+      ]
     }
   },
   alluvial: {
     kharif: {
-      English: { crop: "Sugarcane", suitability: 92, reason: "Alluvial soil is rich in minerals and supports heavy sugarcane growth.", tips: ["Regular heavy irrigation", "Apply nitrogen-rich fertilizers", "Control shoot borer"] },
-      Marathi: { crop: "ऊस", suitability: 92, reason: "गाळाची माती खनिजांनी समृद्ध असते आणि उसाच्या वाढीस मदत करते.", tips: ["नियमित भारी सिंचन करा", "नत्रयुक्त खतांचा वापर करा", "खोडकिडा नियंत्रित करा"] },
-      Hindi: { crop: "गन्ना", suitability: 92, reason: "जलोढ़ मिट्टी खनिजों से भरपूर होती है और गन्ने की अच्छी वृद्धि में मदद करती है।", tips: ["नियमित भारी सिंचाई करें", "नाइट्रोजन युक्त उर्वरकों का प्रयोग करें", "शूट बोरर को नियंत्रित करें"] }
+      English: [
+        { crop: "Sugarcane", suitability: 92, reason: "Alluvial soil is rich in minerals and supports heavy sugarcane growth.", tips: ["Regular heavy irrigation", "Apply nitrogen-rich fertilizers", "Control shoot borer"] },
+        { crop: "Rice", suitability: 90, reason: "Retains water well, making it suitable for paddy cultivation.", tips: ["Maintain standing water", "Apply zinc sulphate", "Control blast disease"] },
+        { crop: "Maize", suitability: 88, reason: "Highly productive in fertile alluvial soils.", tips: ["Control fall armyworm", "Apply balanced fertilizers", "Timely weeding"] }
+      ],
+      Marathi: [
+        { crop: "ऊस", suitability: 92, reason: "गाळाची माती खनिजांनी समृद्ध असते आणि उसाच्या वाढीस मदत करते.", tips: ["नियमित भारी सिंचन करा", "नत्रयुक्त खतांचा वापर करा", "खोडकिडा नियंत्रित करा"] },
+        { crop: "भात", suitability: 90, reason: "पाणी चांगले धरून ठेवते, त्यामुळे भात शेतीसाठी योग्य आहे.", tips: ["पाणी साचवून ठेवा", "झिंक सल्फेट वापरा", "करपा रोग नियंत्रित करा"] },
+        { crop: "मका", suitability: 88, reason: "सुपीक गाळाच्या जमिनीत अत्यंत उत्पादक.", tips: ["लष्करी अळी नियंत्रित करा", "संतुलित खते वापरा", "वेळेवर तण काढणे"] }
+      ],
+      Hindi: [
+        { crop: "गन्ना", suitability: 92, reason: "जलोढ़ मिट्टी खनिजों से भरपूर होती है और गन्ने की अच्छी वृद्धि में मदद करती है।", tips: ["नियमित भारी सिंचाई करें", "नाइट्रोजन युक्त उर्वरकों का प्रयोग करें", "शूट बोरर को नियंत्रित करें"] },
+        { crop: "चावल", suitability: 90, reason: "पानी को अच्छी तरह सोखता है, जिससे यह धान की खेती के लिए उपयुक्त हो जाता है।", tips: ["खड़ा पानी बनाए रखें", "जिंक सल्फेट डालें", "ब्लास्ट रोग को नियंत्रित करें"] },
+        { crop: "मक्का", suitability: 88, reason: "उपजाऊ जलोढ़ मिट्टी में अत्यधिक उत्पादक।", tips: ["फॉल आर्मीवर्म को नियंत्रित करें", "संतुलित उर्वरक डालें", "समय पर निराई"] }
+      ]
     },
     rabi: {
-      English: { crop: "Onion", suitability: 90, reason: "Alluvial soil provides excellent texture for bulb development in winter.", tips: ["Maintain consistent moisture", "Control thrips", "Proper curing after harvest"] },
-      Marathi: { crop: "कांदा", suitability: 90, reason: "गाळाची माती हिवाळ्यात कांद्याच्या वाढीसाठी उत्कृष्ट पोत प्रदान करते.", tips: ["सतत ओलावा राखा", "थ्रिप्स नियंत्रित करा", "काढणीनंतर योग्य क्युरिंग करा"] },
-      Hindi: { crop: "प्याज", suitability: 90, reason: "जलोढ़ मिट्टी सर्दियों में कंद के विकास के लिए उत्कृष्ट बनावट प्रदान करती है।", tips: ["लगातार नमी बनाए रखें", "थ्रिप्स को नियंत्रित करें", "कटाई के बाद उचित क्योरिंग करें"] }
+      English: [
+        { crop: "Onion", suitability: 90, reason: "Alluvial soil provides excellent texture for bulb development in winter.", tips: ["Maintain consistent moisture", "Control thrips", "Proper curing after harvest"] },
+        { crop: "Wheat", suitability: 88, reason: "Highly suitable for wheat due to fertility and texture.", tips: ["Timely sowing", "Irrigate at CRI stage", "Control rust"] },
+        { crop: "Mustard", suitability: 85, reason: "Grows well in alluvial soil with moderate water.", tips: ["Control aphids", "Thinning is important", "Harvest when pods turn yellow"] }
+      ],
+      Marathi: [
+        { crop: "कांदा", suitability: 90, reason: "गाळाची माती हिवाळ्यात कांद्याच्या वाढीसाठी उत्कृष्ट पोत प्रदान करते.", tips: ["सतत ओलावा राखा", "थ्रिप्स नियंत्रित करा", "काढणीनंतर योग्य क्युरिंग करा"] },
+        { crop: "गहू", suitability: 88, reason: "सुपीकता आणि पोत यामुळे गव्हासाठी अत्यंत योग्य.", tips: ["वेळेवर पेरणी", "मुकुट मुळे फुटण्याच्या वेळी सिंचन", "तांबेरा नियंत्रण"] },
+        { crop: "मोहरी", suitability: 85, reason: "मध्यम पाण्यात गाळाच्या जमिनीत चांगली येते.", tips: ["मावा नियंत्रित करा", "विरळणी महत्त्वाची आहे", "शेंगा पिवळ्या झाल्यावर काढणी करा"] }
+      ],
+      Hindi: [
+        { crop: "प्याज", suitability: 90, reason: "जलोढ़ मिट्टी सर्दियों में कंद के विकास के लिए उत्कृष्ट बनावट प्रदान करती है।", tips: ["लगातार नमी बनाए रखें", "थ्रिप्स को नियंत्रित करें", "कटाई के बाद उचित क्योरिंग करें"] },
+        { crop: "गेहूं", suitability: 88, reason: "उर्वरता और बनावट के कारण गेहूं के लिए अत्यधिक उपयुक्त।", tips: ["समय पर बुवाई", "सीआरआई चरण में सिंचाई करें", "रस्ट नियंत्रण"] },
+        { crop: "सरसों", suitability: 85, reason: "मध्यम पानी के साथ जलोढ़ मिट्टी में अच्छी तरह बढ़ती है।", tips: ["एफिड्स को नियंत्रित करें", "थिनिंग महत्वपूर्ण है", "फलियां पीली होने पर कटाई करें"] }
+      ]
     }
   },
   laterite: {
     kharif: {
-      English: { crop: "Mango", suitability: 85, reason: "Laterite soil in Konkan region is world-famous for Alphonso mangoes.", tips: ["Apply organic matter", "Manage irrigation in summer", "Prune regularly"] },
-      Marathi: { crop: "आंबा", suitability: 85, reason: "कोकण भागातील जांभी माती हापूस आंब्यासाठी जगप्रसिद्ध आहे.", tips: ["सेंद्रिय पदार्थ टाका", "उन्हाळ्यात सिंचन व्यवस्थापन करा", "नियमित छाटणी करा"] },
-      Hindi: { crop: "आम", suitability: 85, reason: "कोंकण क्षेत्र की लैटेराइट मिट्टी अल्फांसो आम के लिए विश्व प्रसिद्ध है।", tips: ["जैविक पदार्थ डालें", "गर्मियों में सिंचाई का प्रबंधन करें", "नियमित छंटाई करें"] }
+      English: [
+        { crop: "Mango", suitability: 85, reason: "Laterite soil in Konkan region is world-famous for Alphonso mangoes.", tips: ["Apply organic matter", "Manage irrigation in summer", "Prune regularly"] },
+        { crop: "Cashew", suitability: 82, reason: "Laterite soil is ideal for cashew plantation.", tips: ["Control tea mosquito bug", "Clean the base", "Harvest fallen nuts"] },
+        { crop: "Rice", suitability: 78, reason: "Can be grown in laterite soil with heavy organic manuring.", tips: ["Use local varieties", "Apply green manure", "Control crabs in fields"] }
+      ],
+      Marathi: [
+        { crop: "आंबा", suitability: 85, reason: "कोकण भागातील जांभी माती हापूस आंब्यासाठी जगप्रसिद्ध आहे.", tips: ["सेंद्रिय पदार्थ टाका", "उन्हाळ्यात सिंचन व्यवस्थापन करा", "नियमित छाटणी करा"] },
+        { crop: "काजू", suitability: 82, reason: "जांभी माती काजू लागवडीसाठी आदर्श आहे.", tips: ["टी मॉस्किटो बग नियंत्रित करा", "बुंधा स्वच्छ ठेवा", "खाली पडलेले काजू गोळा करा"] },
+        { crop: "भात", suitability: 78, reason: "भरपूर सेंद्रिय खतांचा वापर करून जांभ्या जमिनीत भात घेता येतो.", tips: ["स्थानिक वाण वापरा", "हिरवळीच्या खतांचा वापर करा", "खेकड्यांचे नियंत्रण करा"] }
+      ],
+      Hindi: [
+        { crop: "आम", suitability: 85, reason: "कोंकण क्षेत्र की लैटेराइट मिट्टी अल्फांसो आम के लिए विश्व प्रसिद्ध है।", tips: ["जैविक पदार्थ डालें", "गर्मियों में सिंचाई का प्रबंधन करें", "नियमित छंटाई करें"] },
+        { crop: "काजू", suitability: 82, reason: "लैटेराइट मिट्टी काजू के बागान के लिए आदर्श है।", tips: ["टी मॉस्किटो बग को नियंत्रित करें", "आधार को साफ रखें", "गिरे हुए नट्स की कटाई करें"] },
+        { crop: "चावल", suitability: 78, reason: "भारी जैविक खाद के साथ लैटेराइट मिट्टी में उगाया जा सकता है।", tips: ["स्थानीय किस्मों का उपयोग करें", "हरी खाद डालें", "खेतों में केकड़ों को नियंत्रित करें"] }
+      ]
     }
   }
 };
@@ -787,31 +881,52 @@ const CropAdvisorCard = () => {
         </div>
       ) : (
         <div className="space-y-6">
-          <div className="p-8 bg-white dark:bg-slate-800/30 rounded-3xl border border-slate-100 dark:border-slate-800 text-center shadow-sm">
-            <div className="w-20 h-20 bg-slate-50 dark:bg-slate-800 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl shadow-slate-200/50 dark:shadow-none">
-              <Sprout className="w-10 h-10 text-emerald-500" />
-            </div>
-            <h4 className="text-3xl font-black text-slate-900 dark:text-white mb-2">{recommendation.crop}</h4>
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 rounded-full text-[10px] font-black uppercase tracking-widest">
-              {recommendation.suitability}% {t('match')}
-            </div>
+          <div className="flex items-center justify-between">
+            <h4 className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em]">{t('recommendations')}</h4>
+            <button 
+              onClick={() => { setSoil(''); setSeason(''); setRecommendation(null); }}
+              className="text-[10px] font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-widest flex items-center gap-1 hover:underline"
+            >
+              <X className="w-3 h-3" /> {t('clear')}
+            </button>
           </div>
-          <div className="p-6 bg-white dark:bg-slate-800/50 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm">
-            <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed italic">"{recommendation.reason}"</p>
-          </div>
-          <div className="space-y-3">
-            {recommendation.tips.map((tip: string, idx: number) => (
-              <div key={idx} className="flex items-start gap-4 p-4 rounded-2xl bg-white dark:bg-slate-800/30 border border-slate-100 dark:border-slate-800 shadow-sm">
-                <div className="mt-1 p-1 bg-emerald-500/10 rounded-md">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
+          
+          <div className="grid gap-4">
+            {recommendation.map((rec: any, idx: number) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: idx * 0.1 }}
+                className="p-6 bg-white dark:bg-slate-800/30 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm hover:border-emerald-500/30 transition-all group"
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-emerald-500/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <Sprout className="w-6 h-6 text-emerald-500" />
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-black text-slate-900 dark:text-white">{rec.crop}</h4>
+                      <div className="inline-flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 text-[10px] font-black uppercase tracking-widest">
+                        {rec.suitability}% {t('match')}
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <p className="text-sm text-slate-700 dark:text-slate-200 font-medium leading-relaxed">{tip}</p>
-              </div>
+                
+                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4 italic">"{rec.reason}"</p>
+                
+                <div className="space-y-2">
+                  {rec.tips.map((tip: string, tIdx: number) => (
+                    <div key={tIdx} className="flex items-start gap-2 text-[11px] font-medium text-slate-500 dark:text-slate-400">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
+                      {tip}
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
             ))}
           </div>
-          <button onClick={() => { setSoil(''); setSeason(''); setRecommendation(null); }} className="w-full py-4 text-slate-400 dark:text-slate-500 font-black text-[10px] uppercase tracking-[0.3em] hover:text-emerald-500 transition-colors flex items-center justify-center gap-2">
-            <X className="w-4 h-4" />{t('clear')}
-          </button>
         </div>
       )}
     </motion.div>
